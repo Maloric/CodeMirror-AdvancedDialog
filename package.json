@@ -1,0 +1,23 @@
+{
+  "name": "codemirror-advanceddialog",
+  "version": "1.0.0",
+  "description": "A more advanced dialog for CodeMirror allowing for multiple inputs and buttons.",
+  "main": "advanced-dialog.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maloric/CodeMirror-AdvancedDialog.git"
+  },
+  "keywords": [
+    "codemirror",
+    "dialog"
+  ],
+  "author": "Jamie Morris",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Maloric/CodeMirror-AdvancedDialog/issues"
+  },
+  "homepage": "https://github.com/Maloric/CodeMirror-AdvancedDialog#readme"
+}
