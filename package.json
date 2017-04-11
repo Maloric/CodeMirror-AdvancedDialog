@@ -1,6 +1,6 @@
 {
   "name": "codemirror-advanceddialog",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A more advanced dialog for CodeMirror allowing for multiple inputs and buttons.",
   "main": "advanced-dialog.js",
   "scripts": {
