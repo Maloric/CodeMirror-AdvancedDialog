@@ -15,3 +15,10 @@ The first parameter is an html template or DOM node much like the vanilla dialog
 - **buttonBehaviours** (object) - an object with behaviours for each button in the order that they appear in the template.
   * *callback* (function) - a callback function that will be executed if the user hits enter when this field has focus.  The function receives two parameters - the first is an array of the input fields in the dialog and the second is the DOM event.
   
+## To install
+
+You can install either manually or via npm.  The latter is very simple:
+
+    npm install --save codemirror-advancedsearch
+
+If you want to install manually, however, you will need to include both `advanced-dialog.js` and `dialog.css` in your page.
