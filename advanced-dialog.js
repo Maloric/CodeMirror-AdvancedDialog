@@ -42,6 +42,8 @@
             if (options.shrinkEditor) {
                 wrapper.style.removeProperty('margin-top');
                 wrapper.style.removeProperty('height');
+                scrollbar.style.removeProperty('margin-top');
+                scrollbar.style.removeProperty('height');
             }
             if (closed) return;
             closed = true;
@@ -57,12 +59,16 @@
         let dialog = dialogDiv(this, template, options.bottom);
         let dialogHeight = (dialog.offsetHeight + 10);
 
-        let wrapper;
+        let wrapper, scrollbar;
         if (options.shrinkEditor) {
             wrapper = this.display.wrapper.querySelector('.CodeMirror-scroll');
+            scrollbar = this.display.wrapper.querySelector('.CodeMirror-vscrollbar');
             let wrapperHeight = window.getComputedStyle(wrapper).getPropertyValue('height');
+            let scrollbarHeight = window.getComputedStyle(scrollbar).getPropertyValue('height');
             wrapper.style.height = (parseInt(wrapperHeight) - dialogHeight) + 'px';
             wrapper.style.marginTop = (wrapper.style.marginTop || 0) + dialogHeight + 'px';
+            scrollbar.style.height = (parseInt(scrollbarHeight) - dialogHeight) + 'px';
+            scrollbar.style.marginTop = (scrollbar.style.marginTop || 0) + dialogHeight + 'px';
         }
 
         let inputs = dialog.getElementsByTagName("input");
