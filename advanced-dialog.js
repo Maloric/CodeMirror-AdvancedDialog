@@ -83,16 +83,16 @@
                 }
                 if (behaviour.onInput) {
                     CodeMirror.on(input, "input", (e) => {
-                        behaviour.onInput(e, input.value, close);
+                        behaviour.onInput(inputs, e);
                     });
                 }
                 if (behaviour.onKeyUp) {
                     CodeMirror.on(input, "keyup", (e) => {
-                        behaviour.onKeyUp(e, input.value, close);
+                        behaviour.onKeyUp(inputs, e);
                     });
                 }
                 CodeMirror.on(input, "keydown", (e) => {
-                    if (behaviour.onKeyDown && behaviour.onKeyDown(e, input.value, close)) {
+                    if (behaviour.onKeyDown && behaviour.onKeyDown(inputs, e)) {
                         return;
                     }
                     if (e.keyCode === 27 || (!!behaviour.closeOnEnter && e.keyCode === 13)) {

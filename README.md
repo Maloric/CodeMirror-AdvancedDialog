@@ -22,3 +22,9 @@ You can install either manually or via npm.  The latter is very simple:
     npm install --save codemirror-advancedsearch
 
 If you want to install manually, however, you will need to include both `advanced-dialog.js` and `dialog.css` in your page.
+
+## Changes
+
+### v1.1.0 - 2017-04-12
+
+The `onInput`, `onKeyDown` and `onKeyUp` behaviours for input boxes now match the signature of the callback, in that they each are passed two parameters: an array of the inputs in the dialog, and the DOM event that triggered the function call.
