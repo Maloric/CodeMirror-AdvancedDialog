@@ -1,8 +1,4 @@
-.CodeMirror-dialog {
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: 15;
+.CodeMirror-advanced-dialog {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -12,19 +8,11 @@
     color: inherit;
     border: 1px solid #eee;
     box-shadow: #000 0 0 40px;
+    position: relative;
+    z-index: 10;
 }
 
-.CodeMirror-dialog-top {
-    border-bottom: 1px solid #eee;
-    top: 0;
-}
-
-.CodeMirror-dialog-bottom {
-    border-top: 1px solid #eee;
-    bottom: 0;
-}
-
-.CodeMirror-dialog input {
+.CodeMirror-advanced-dialog input {
     border: none;
     outline: none;
     background: transparent;
@@ -33,21 +21,21 @@
     font-family: monospace;
 }
 
-.CodeMirror-dialog button {
+.CodeMirror-advanced-dialog button {
     font-size: 70%;
 }
 
-.CodeMirror-dialog .row {
+.CodeMirror-advanced-dialog .row {
     display: flex;
     width: 100%;
     align-items: center;
 }
 
-.CodeMirror-dialog label {
+.CodeMirror-advanced-dialog label {
     flex: 0 0 100px;
 }
 
-.CodeMirror-dialog input[type="text"] {
+.CodeMirror-advanced-dialog input[type="text"] {
     display: inline-block;
     border: 1px solid #eee;
     margin: 10px;

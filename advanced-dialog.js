@@ -11,68 +11,53 @@
     else // Plain browser env
         mod(CodeMirror);
 })((CodeMirror) => {
-    let dialogDiv = (cm, template, bottom) => {
-        let dialog = cm.getWrapperElement().appendChild(document.createElement("div"));
-        if (bottom) {
-            dialog.className = "CodeMirror-dialog CodeMirror-dialog-bottom";
-        } else {
-            dialog.className = "CodeMirror-dialog CodeMirror-dialog-top";
-        }
+    let createPanel = (cm, template, bottom) => {
+        let el = document.createElement("div");
+        el.className = 'CodeMirror-advanced-dialog';
 
         if (typeof template == "string") {
-            dialog.innerHTML = template;
+            el.innerHTML = template;
         } else { // Assuming it's a detached DOM element.
-            dialog.appendChild(template);
+            el.appendChild(template);
         }
-        return dialog;
+        let panel = cm.addPanel(el, {
+            position: bottom ? "bottom" : "top"
+        });
+        return panel;
     }
 
-    let closeNotification = (cm, newVal) => {
-        if (cm.state.currentNotificationClose) {
-            cm.state.currentNotificationClose();
+    let closePanel = (cm) => {
+        let state = cm.state.advancedDialog;
+        if (!state || !state.current) {
+            return;
         }
-        cm.state.currentNotificationClose = newVal;
+
+        state.current.panel.clear();
+
+        if (state.current.onClose) state.current.onClose(state.current.panel.node);
+        delete state.current;
+        cm.focus();
     }
 
     CodeMirror.defineExtension("openAdvancedDialog", function (template, options) {
+        if (!this.addPanel) {
+            throw `CodeMirror-AdvancedDialog requires the panel addon to be included in the page.  This can usually be found in the addons folder of the default CodeMirror installation, and must be included BEFORE the AdvancedDialog addon..`;
+        }
         if (!options) options = {};
+        if (!this.state.advancedDialog) this.state.advancedDialog = {};
 
-        let closed = false;
-        let close = () => {
-            if (options.shrinkEditor) {
-                wrapper.style.removeProperty('margin-top');
-                wrapper.style.removeProperty('height');
-                scrollbar.style.removeProperty('margin-top');
-                scrollbar.style.removeProperty('height');
-            }
-            if (closed) return;
-            closed = true;
-            dialog.parentNode.removeChild(dialog);
-            this.focus();
-
-            if (options.onClose) options.onClose(dialog);
-
+        if (this.state.advancedDialog.current) {
+            closePanel(this);
         }
 
-        closeNotification(this, close);
+        let panel = createPanel(this, template, options.bottom);
+        this.state.advancedDialog.current = {
+            panel: panel,
+            onClose: options.onClose
+        };
 
-        let dialog = dialogDiv(this, template, options.bottom);
-        let dialogHeight = (dialog.offsetHeight + 10);
-
-        let wrapper, scrollbar;
-        if (options.shrinkEditor) {
-            wrapper = this.display.wrapper.querySelector('.CodeMirror-scroll');
-            scrollbar = this.display.wrapper.querySelector('.CodeMirror-vscrollbar');
-            let wrapperHeight = window.getComputedStyle(wrapper).getPropertyValue('height');
-            let scrollbarHeight = window.getComputedStyle(scrollbar).getPropertyValue('height');
-            wrapper.style.height = (parseInt(wrapperHeight) - dialogHeight) + 'px';
-            wrapper.style.marginTop = (wrapper.style.marginTop || 0) + dialogHeight + 'px';
-            scrollbar.style.height = (parseInt(scrollbarHeight) - dialogHeight) + 'px';
-            scrollbar.style.marginTop = (scrollbar.style.marginTop || 0) + dialogHeight + 'px';
-        }
-
-        let inputs = dialog.getElementsByTagName("input");
-        let buttons = dialog.getElementsByTagName("button");
+        let inputs = panel.node.getElementsByTagName("input");
+        let buttons = panel.node.getElementsByTagName("button");
         if (inputs && inputs.length > 0 && options.inputBehaviours) {
             for (let i = 0; i < options.inputBehaviours.length; i++) {
                 let behaviour = options.inputBehaviours[i];
@@ -84,32 +69,40 @@
                 if (!!behaviour.focus) {
                     input.focus();
                 }
+
                 if (!!behaviour.selectValueOnOpen) {
                     input.select();
                 }
+
                 if (behaviour.onInput) {
                     CodeMirror.on(input, "input", (e) => {
                         behaviour.onInput(inputs, e);
                     });
                 }
+
                 if (behaviour.onKeyUp) {
                     CodeMirror.on(input, "keyup", (e) => {
                         behaviour.onKeyUp(inputs, e);
                     });
                 }
+
                 CodeMirror.on(input, "keydown", (e) => {
                     if (behaviour.onKeyDown && behaviour.onKeyDown(inputs, e)) {
                         return;
                     }
+
                     if (e.keyCode === 27 || (!!behaviour.closeOnEnter && e.keyCode === 13)) {
                         input.blur();
                         CodeMirror.e_stop(e);
-                        close();
+                        closePanel(this);
                     } else if (e.keyCode === 13 && behaviour.callback) {
                         behaviour.callback(inputs, e);
                     }
                 });
-                if (behaviour.closeOnBlur !== false) CodeMirror.on(input, "blur", close);
+
+                if (behaviour.closeOnBlur !== false) CodeMirror.on(input, "blur", () => {
+                    closePanel(this);
+                });
             }
         }
 
@@ -122,12 +115,13 @@
                     });
                 } else {
                     CodeMirror.on(buttons[i], "click", () => {
-                        close();
-                        this.focus();
+                        closePanel(this);
                     });
                 }
             }
         }
-        return close;
+        return () => {
+            closePanel(this);
+        };
     });
 });
