@@ -24,7 +24,11 @@ You can install either manually or via npm.  The latter is very simple:
 
 If you want to install manually, however, you will need to include both `advanced-dialog.js` and `dialog.css` in your page.
 
-## Changes
+## Dependencies
+
+Obviously you need to include CodeMirror in the page.  You also need to include addons/display/panel.js from the CodeMirror default installation.
+
+## Notable Changes
 
 ### v1.1.0 - 2017-04-12
 
