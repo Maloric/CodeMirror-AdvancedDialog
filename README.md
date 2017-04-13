@@ -14,6 +14,7 @@ The first parameter is an html template or DOM node much like the vanilla dialog
   * *callback* (function) - a callback function that will be executed if the user hits enter when this field has focus.  The function receives two parameters - the first is an array of the input fields in the dialog and the second is the DOM event.
 - **buttonBehaviours** (object) - an object with behaviours for each button in the order that they appear in the template.
   * *callback* (function) - a callback function that will be executed if the user hits enter when this field has focus.  The function receives two parameters - the first is an array of the input fields in the dialog and the second is the DOM event.
+  * *onClose* (function) - a callback that is fired after the dialog is closed.  It is passed a single parameter, which is a reference to the dialog DOM element (after is is removed from the DOM).
   
 ## To install
 
