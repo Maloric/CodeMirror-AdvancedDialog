@@ -22,11 +22,11 @@ You can install either manually or via npm.  The latter is very simple:
 
     npm install --save codemirror-advancedsearch
 
-If you want to install manually, however, you will need to include both `advanced-dialog.js` and `dialog.css` in your page.
+If you want to install manually, however, you will need to include both `dist/advanced-dialog.js` and `dist/dialog.css` in your page.
 
 ## Dependencies
 
-Obviously you need to include CodeMirror in the page.  You also need to include addons/display/panel.js from the CodeMirror default installation.
+Obviously you need to include CodeMirror in the page.  You also need to include `addons/display/panel.js` from the CodeMirror default installation.
 
 ## Notable Changes
 

@@ -1,12 +1,14 @@
 {
   "name": "codemirror-advanceddialog",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "A more advanced dialog for CodeMirror allowing for multiple inputs and buttons.",
   "main": "dist/advanced-dialog.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "babel": "babel src/advanced-dialog.js --out-file dist/advanced-dialog.js --source-maps",
+    "copyCss": "copyfiles src/dialog.css dialog.css dist -f",
     "prebuild": "rimraf dist && mkdirp dist",
-    "build": "babel src/advanced-dialog.js --out-file dist/advanced-dialog.js --source-maps"
+    "build": "npm run babel && npm run copyCss"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,7 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-preset-latest": "^6.24.1",
+    "copyfiles": "^1.2.0",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.1"
   }
