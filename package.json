@@ -1,12 +1,12 @@
 {
   "name": "codemirror-advanceddialog",
-  "version": "1.1.3",
+  "version": "1.1.5",
   "description": "A more advanced dialog for CodeMirror allowing for multiple inputs and buttons.",
   "main": "built/advanced-dialog.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prebuild": "rimraf built && mkdirp built",
-    "build": "babel src/advanced-dialog.js --out-file built/advanced-dialog.js --source-maps"
+    "prebuild": "rimraf dist && mkdirp dist",
+    "build": "babel src/advanced-dialog.js --out-file dist/advanced-dialog.js --source-maps"
   },
   "repository": {
     "type": "git",
