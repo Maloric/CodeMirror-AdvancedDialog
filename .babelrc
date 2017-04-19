@@ -1,7 +1,7 @@
 {
     "presets": ["latest"],
     "ignore": [
-        "built",
+        "dist",
         "node_modules"
     ]
 }
