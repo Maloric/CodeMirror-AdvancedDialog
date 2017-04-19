@@ -41,7 +41,7 @@
 
     CodeMirror.defineExtension("openAdvancedDialog", function (template, options) {
         if (!this.addPanel) {
-            throw `CodeMirror-AdvancedDialog requires the panel addon to be included in the page.  This can usually be found in the addons folder of the default CodeMirror installation, and must be included BEFORE the AdvancedDialog addon..`;
+            throw `CodeMirror-AdvancedDialog requires the panel addon to be included in the page.  This can usually be found in the addons folder of the default CodeMirror installation, and must be included BEFORE the AdvancedDialog addon.`;
         }
         if (!options) options = {};
         if (!this.state.advancedDialog) this.state.advancedDialog = {};

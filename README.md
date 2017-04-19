@@ -30,6 +30,10 @@ Obviously you need to include CodeMirror in the page.  You also need to include 
 
 ## Notable Changes
 
+### v1.1.3 - 2017-04-19
+
+Implemented a build step using Babel to make the addon compatible with browsers that don't yet support ES6 features.  The correct file to include is now built/advanced-dialog.js.
+
 ### v1.1.0 - 2017-04-12
 
 The `onInput`, `onKeyDown` and `onKeyUp` behaviours for input boxes now match the signature of the callback, in that they each are passed two parameters: an array of the inputs in the dialog, and the DOM event that triggered the function call.
