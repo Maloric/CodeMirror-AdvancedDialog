@@ -32,7 +32,7 @@ Obviously you need to include CodeMirror in the page.  You also need to include 
 
 ### v1.1.3 - 2017-04-19
 
-Implemented a build step using Babel to make the addon compatible with browsers that don't yet support ES6 features.  The correct file to include is now built/advanced-dialog.js.
+Implemented a build step using Babel to make the addon compatible with browsers that don't yet support ES6 features.  The correct file to include is now dist/advanced-dialog.js.
 
 ### v1.1.0 - 2017-04-12
 
