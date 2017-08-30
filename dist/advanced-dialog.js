@@ -13,7 +13,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         define(["codemirror"], mod);else // Plain browser env
         mod(CodeMirror);
 })(function (CodeMirror) {
-    var createPanel = function createPanel(cm, template, bottom) {
+    var createPanel = function createPanel(cm, template, bottom, height) {
         var el = document.createElement("div");
         el.className = 'CodeMirror-advanced-dialog';
 
@@ -24,7 +24,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             el.appendChild(template);
         }
         var panel = cm.addPanel(el, {
-            position: bottom ? "bottom" : "top"
+            position: bottom ? "bottom" : "top",
+            height: height
         });
         return panel;
     };
@@ -55,7 +56,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             closePanel(this);
         }
 
-        var panel = createPanel(this, template, options.bottom);
+        var panel = createPanel(this, template, options.bottom, options.shrinkEditor ? null : "0");
         this.state.advancedDialog.current = {
             panel: panel,
             onClose: options.onClose

@@ -11,7 +11,7 @@
     else // Plain browser env
         mod(CodeMirror);
 })((CodeMirror) => {
-    let createPanel = (cm, template, bottom) => {
+    let createPanel = (cm, template, bottom, height) => {
         let el = document.createElement("div");
         el.className = 'CodeMirror-advanced-dialog';
 
@@ -21,7 +21,8 @@
             el.appendChild(template);
         }
         let panel = cm.addPanel(el, {
-            position: bottom ? "bottom" : "top"
+            position: bottom ? "bottom" : "top",
+            height
         });
         return panel;
     }
@@ -50,7 +51,7 @@
             closePanel(this);
         }
 
-        let panel = createPanel(this, template, options.bottom);
+        let panel = createPanel(this, template, options.bottom, options.shrinkEditor ? null : "0");
         this.state.advancedDialog.current = {
             panel: panel,
             onClose: options.onClose
